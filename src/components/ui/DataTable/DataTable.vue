@@ -121,11 +121,26 @@ function handlePageSizeChange(e) {
       <ViewPopover />
     </div>
     <div
-      class="relative max-h-[485px] ring-1 ring-gray-600/50 rounded-md overflow-hidden min-h-[485px] overflow-x-auto overflow-y-auto w-full"
+      class="
+        relative
+        max-h-[485px]
+        ring-1 ring-gray-600/50
+        rounded-md
+        overflow-hidden
+        min-h-[485px]
+        overflow-x-auto overflow-y-auto
+        w-full
+      "
     >
       <table class="w-full">
         <thead
-          class="sticky top-0 bg-white dark:bg-gray-700 dark:shadow-gray-900 shadow-sm shadow-gray-300"
+          class="
+            sticky
+            top-0
+            bg-white
+            dark:bg-gray-700 dark:shadow-gray-900
+            shadow-sm shadow-gray-300
+          "
         >
           <tr v-for="headerGroup in table.getHeaderGroups()" :key="headerGroup.id">
             <th
@@ -164,7 +179,7 @@ function handlePageSizeChange(e) {
         </tbody>
       </table>
     </div>
-    <div class="grid grid-cols-2 w-full gap-3 p-2 px-0">
+    <div class="flex justify-between w-full gap-3 p-2 px-0">
       <div class="flex items-center gap-1">
         <span>Page</span>
         <strong>
@@ -179,7 +194,15 @@ function handlePageSizeChange(e) {
           :paginationPageSize="table.getState().pagination.pageSize"
         /> -->
         <select
-          class="dark:bg-gray-900 py-2 !px-6 rounded-sm dark:text-gray-300 border dark:border-gray-600"
+          class="
+            dark:bg-gray-900
+            py-2
+            !px-6
+            rounded-sm
+            dark:text-gray-300
+            border
+            dark:border-gray-600
+          "
           :value="table.getState().pagination.pageSize"
           @change="handlePageSizeChange"
         >
@@ -187,7 +210,7 @@ function handlePageSizeChange(e) {
             Show {{ pageSize }}
           </option>
         </select>
-        <div class="flex w-64 justify-end items-center gap-2">
+        <div class="flex justify-end items-center gap-2">
           <span>Rows per page</span>
           <SelectRoot :value="table.getState().pagination.pageSize" @change="handlePageSizeChange">
             <SelectTrigger
@@ -215,13 +238,42 @@ function handlePageSizeChange(e) {
                 :side-offset="5"
                 position="popper"
                 side="top"
-                class="w-16 bg-white dark:bg-gray-950 dark:text-white rounded shadow will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
+                class="
+                  w-16
+                  bg-white
+                  dark:bg-gray-950 dark:text-white
+                  rounded
+                  shadow
+                  will-change-[opacity,transform]
+                  data-[side=top]:animate-slideDownAndFade
+                  data-[side=right]:animate-slideLeftAndFade
+                  data-[side=bottom]:animate-slideUpAndFade
+                  data-[side=left]:animate-slideRightAndFade
+                "
               >
                 <SelectItem
                   v-for="pageSize in pageSizes"
                   :key="pageSize"
                   :value="pageSize"
-                  class="text-sm leading-none hover:ring-2 dark:ring-gray-500/50 text-grass11 rounded flex items-center h-12 pr-6 pl-6 relative select-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:outline-none data-[highlighted]:bg-green9 data-[highlighted]:text-green1"
+                  class="
+                    text-sm
+                    leading-none
+                    hover:ring-2
+                    dark:ring-gray-500/50
+                    text-grass11
+                    rounded
+                    flex
+                    items-center
+                    h-12
+                    pr-6
+                    pl-6
+                    relative
+                    select-none
+                    data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none
+                    data-[highlighted]:outline-none
+                    data-[highlighted]:bg-green9
+                    data-[highlighted]:text-green1
+                  "
                 >
                   {{ pageSize }}
                 </SelectItem>
