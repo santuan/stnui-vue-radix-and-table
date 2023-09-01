@@ -8,7 +8,6 @@ import {
   createColumnHelper
 } from '@tanstack/vue-table'
 import { ref } from 'vue'
-import { makeData, type Person } from './makeData'
 import { Button } from '../Button/Button'
 import DataTableActions from './DataTableActions.vue'
 import DataTableCheckbox from './DataTableCheckbox.vue'
@@ -16,6 +15,18 @@ import ViewPopover from './ViewPopover.vue'
 import IconPlusCircle from '@/components/icons/IconPlusCircle.vue'
 import IconAsc from '@/components/icons/IconAsc.vue'
 import IconDesc from '@/components/icons/IconDesc.vue'
+import PEOPLE from '@/data/person.json'
+
+export type Person = {
+  firstName: string
+  lastName: string
+  age: number
+  visits: number
+  progress: number
+  status: 'relationship' | 'complicated' | 'single'
+  createdAt: Date
+  subRows?: Person[]
+}
 
 import {
   SelectContent,
@@ -28,7 +39,8 @@ import {
 
 const INITIAL_PAGE_INDEX = 0
 
-const defaultData = makeData(100)
+const defaultData = PEOPLE
+
 const columnHelper = createColumnHelper<Person>()
 const goToPageNumber = ref(INITIAL_PAGE_INDEX + 1)
 const pageSizes = [10, 20, 30, 40, 50]
@@ -121,26 +133,11 @@ function handlePageSizeChange(e) {
       <ViewPopover />
     </div>
     <div
-      class="
-        relative
-        max-h-[485px]
-        ring-1 ring-gray-600/50
-        rounded-md
-        overflow-hidden
-        min-h-[485px]
-        overflow-x-auto overflow-y-auto
-        w-full
-      "
+      class="relative max-h-[485px] ring-1 ring-gray-600/50 rounded-md overflow-hidden min-h-[485px] overflow-x-auto overflow-y-auto w-full"
     >
       <table class="w-full">
         <thead
-          class="
-            sticky
-            top-0
-            bg-white
-            dark:bg-gray-700 dark:shadow-gray-900
-            shadow-sm shadow-gray-300
-          "
+          class="sticky top-0 bg-white dark:bg-gray-700 dark:shadow-gray-900 shadow-sm shadow-gray-300"
         >
           <tr v-for="headerGroup in table.getHeaderGroups()" :key="headerGroup.id">
             <th
@@ -194,15 +191,7 @@ function handlePageSizeChange(e) {
           :paginationPageSize="table.getState().pagination.pageSize"
         /> -->
         <select
-          class="
-            dark:bg-gray-900
-            py-2
-            !px-6
-            rounded-sm
-            dark:text-gray-300
-            border
-            dark:border-gray-600
-          "
+          class="dark:bg-gray-900 py-2 !px-6 rounded-sm dark:text-gray-300 border dark:border-gray-600"
           :value="table.getState().pagination.pageSize"
           @change="handlePageSizeChange"
         >
@@ -238,42 +227,13 @@ function handlePageSizeChange(e) {
                 :side-offset="5"
                 position="popper"
                 side="top"
-                class="
-                  w-16
-                  bg-white
-                  dark:bg-gray-950 dark:text-white
-                  rounded
-                  shadow
-                  will-change-[opacity,transform]
-                  data-[side=top]:animate-slideDownAndFade
-                  data-[side=right]:animate-slideLeftAndFade
-                  data-[side=bottom]:animate-slideUpAndFade
-                  data-[side=left]:animate-slideRightAndFade
-                "
+                class="w-16 bg-white dark:bg-gray-950 dark:text-white rounded shadow will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
               >
                 <SelectItem
                   v-for="pageSize in pageSizes"
                   :key="pageSize"
                   :value="pageSize"
-                  class="
-                    text-sm
-                    leading-none
-                    hover:ring-2
-                    dark:ring-gray-500/50
-                    text-grass11
-                    rounded
-                    flex
-                    items-center
-                    h-12
-                    pr-6
-                    pl-6
-                    relative
-                    select-none
-                    data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none
-                    data-[highlighted]:outline-none
-                    data-[highlighted]:bg-green9
-                    data-[highlighted]:text-green1
-                  "
+                  class="text-sm leading-none hover:ring-2 dark:ring-gray-500/50 text-grass11 rounded flex items-center h-12 pr-6 pl-6 relative select-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:outline-none data-[highlighted]:bg-green9 data-[highlighted]:text-green1"
                 >
                   {{ pageSize }}
                 </SelectItem>
