@@ -36,6 +36,7 @@ import {
   SelectTrigger,
   SelectValue
 } from 'radix-vue'
+import StatusPopover from './StatusPopover.vue'
 
 const INITIAL_PAGE_INDEX = 0
 
@@ -120,10 +121,7 @@ function handlePageSizeChange(e) {
           class="ring-1 ring-gray-500/50 h-8 rounded-md text-xs px-3 w-64 py-1.5 dark:bg-gray-950"
         />
         <div class="flex gap-2 items-center">
-          <button :class="Button({ intent: 'default', size: 'sm' })">
-            <IconPlusCircle />
-            Status
-          </button>
+          <StatusPopover/>
           <button :class="Button({ intent: 'default', size: 'sm' })">
             <IconPlusCircle />
             Priority
