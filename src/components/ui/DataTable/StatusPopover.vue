@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/Button/Button';
   <PopoverRoot>
     <PopoverTrigger
       :class="Button({ intent: 'default', size: 'sm' })"
-      aria-label="Update dimensions"
+      aria-label="Update status"
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 15 15">
         <path
