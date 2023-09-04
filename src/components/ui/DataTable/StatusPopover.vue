@@ -31,23 +31,23 @@ import StatusPopoverCheckbox from './StatusPopoverCheckbox.vue'
             <RadixIconSearch class="w-6 mx-2 h-6 shrink-0"/>
             <input type="search" placeholder="Search" class="py-2 outline-none w-full bg-transparent px-2" />
           </fieldset>
-          <fieldset class="flex gap-5 py-0.5 px-2 items-center justify-between">
+          <fieldset class="flex gap-5 py-0 px-2 items-center justify-between">
             <StatusPopoverCheckbox msg="Backlog" />
             <span class="font-mono">21</span>
           </fieldset>
-          <fieldset class="flex gap-5 py-0.5 px-2 items-center justify-between">
+          <fieldset class="flex gap-5 py-0 px-2 items-center justify-between">
             <StatusPopoverCheckbox msg="Todo" />
             <span class="font-mono">2</span>
           </fieldset>
-          <fieldset class="flex gap-5 py-0.5 px-2 items-center justify-between">
+          <fieldset class="flex gap-5 py-0 px-2 items-center justify-between">
             <StatusPopoverCheckbox msg="In Progress" />
             <span class="font-mono">5</span>
           </fieldset>
-          <fieldset class="flex gap-5 py-0.5 px-2 items-center justify-between">
+          <fieldset class="flex gap-5 py-0 px-2 items-center justify-between">
             <StatusPopoverCheckbox msg="Done"/>
             <span class="font-mono">12</span>
           </fieldset>
-          <fieldset class="flex gap-5 py-0.5 px-2 items-center justify-between">
+          <fieldset class="flex gap-5 py-0 px-2 items-center justify-between">
             <StatusPopoverCheckbox msg="Canceled"/>
             <span class="font-mono">12</span>
           </fieldset>

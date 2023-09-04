@@ -35,7 +35,7 @@ const checkboxOne = ref(false)
           </svg>
         </CheckboxIndicator>
       </CheckboxRoot>
-      <span class="select-none text-gray-900 dark:text-white">{{msg}}</span>
+      <span class="select-none text-sm text-gray-900 dark:text-white">{{msg}}</span>
     </label>
   </div>
 </template>

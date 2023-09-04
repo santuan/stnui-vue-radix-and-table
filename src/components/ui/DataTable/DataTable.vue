@@ -303,7 +303,7 @@ th {
   @apply hover:bg-gray-100 hover:dark:bg-gray-900;
 }
 td {
-  @apply border-b  border-gray-300 dark:border-gray-700 py-1 px-3;
+  @apply border-b  border-gray-300 dark:border-gray-700 py-1.5 px-3;
 }
 
 tfoot {
@@ -340,7 +340,7 @@ tbody td:nth-child(1) {
 
 thead th:nth-child(2),
 tbody td:nth-child(2) {
-  @apply w-64 text-left;
+  @apply w-64 pl-0 text-left;
 }
 
 thead th:nth-child(3),
@@ -369,6 +369,6 @@ tbody td:nth-child(7) {
 }
 thead th:nth-child(8),
 tbody td:nth-child(8) {
-  @apply w-12 lg:w-12 text-center;
+  @apply w-10 pr-0 text-center;
 }
 </style>

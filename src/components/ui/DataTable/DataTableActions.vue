@@ -31,7 +31,7 @@ function handleClick() {
 <template>
   <DropdownMenuRoot v-model:open="toggleState">
     <DropdownMenuTrigger
-      class="w-7 h-7 rounded-full ring-2 ring-white dark:ring-gray-950/50 inline-flex items-center justify-center focus:shadow focus:shadow-black cursor-pointer bg-gray-100 dark:bg-gray-900 hover:bg-opacity-60 outline-none"
+      class="w-7 h-7 rounded-full ring-2 ring-white dark:ring-gray-700/50 inline-flex items-center justify-center focus:shadow focus:shadow-black cursor-pointer bg-gray-100 dark:bg-gray-900 hover:bg-opacity-60 outline-none"
       aria-label="Customise options"
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
