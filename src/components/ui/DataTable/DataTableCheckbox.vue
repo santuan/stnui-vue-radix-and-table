@@ -6,9 +6,9 @@ const checkboxOne = ref(false)
 </script>
 
 <template>
-  <div class="flex justify-center items-center gap-2.5">
+  <div class="flex justify-center  items-center gap-2.5">
     <label
-      class="flex focus-visible:ring-2 flex-row gap-4 items-center [&>.checkbox]:hover:bg-gray-100"
+      class="flex focus-within:ring-2 rounded dark:ring-gray-700 ring-gray-600 focus-within:ring-offset-1 flex-row gap-4 items-center [&>.checkbox]:hover:bg-gray-100"
     >
       <CheckboxRoot
         v-model="checkboxOne"
