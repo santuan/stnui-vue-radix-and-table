@@ -16,6 +16,7 @@ import IconPlusCircle from '@/components/icons/IconPlusCircle.vue'
 import IconAsc from '@/components/icons/IconAsc.vue'
 import IconDesc from '@/components/icons/IconDesc.vue'
 import PEOPLE from '@/data/person.json'
+import slugify from '@/components/slugify'
 
 export type Person = {
   id: number
@@ -50,6 +51,7 @@ const pageSizes = [10, 20, 30, 40, 50]
 const data = ref(defaultData)
 const sorting = ref([])
 
+
 const columns = [
   {
     id: 'checkbox',
@@ -78,10 +80,29 @@ const columns = [
   }),
   columnHelper.accessor('status', {
     header: 'Status',
+    cell: (info) => (
+      <span
+        class={
+          'item-'
+          + slugify(info.getValue()) +
+          ' dark:bg-gray-800 text-gray-100 text-xs font-mono px-2 py-1 rounded inline-flex justify-center items-baseline bg-gray-200 '
+        }
+      >
+        {info.getValue()}
+      </span>
+    ),
     footer: (props) => props.column.id
   }),
   columnHelper.accessor('progress', {
-    header: 'Profile Progress',
+    header: 'Progress',
+    cell: (info) => (
+      <div class={'h-2 w-full bg-gray-200 dark:bg-gray-800 overflow-hidden rounded-full'}>
+        <span
+          class={'bg-gray-900 dark:bg-gray-100 h-2 block'}
+          style={{ width: info.getValue() + '%' }}
+        ></span>
+      </div>
+    ),
     footer: (props) => props.column.id
   }),
   {
@@ -125,7 +146,7 @@ function handlePageSizeChange(e) {
         />
         <div class="flex gap-2 items-center">
           <StatusPopover />
-          <button :class="Button({ intent: 'default', size: 'sm' })">
+          <button :class="Button({ intent: 'outline', size: 'sm' })">
             <IconPlusCircle />
             Priority
           </button>
@@ -359,13 +380,13 @@ thead th:nth-child(1) div {
 
 thead th:nth-child(1),
 tbody td:nth-child(1) {
-  @apply w-6 text-center;
+  @apply w-6 lg:px-0 pl-6 text-center;
   max-width: 20px;
 }
 
 thead th:nth-child(2),
 tbody td:nth-child(2) {
-  @apply w-8 pl-0 text-left;
+  @apply w-16 min-w-[8rem] lg:pl-0 text-left;
 }
 
 thead th:nth-child(3),
@@ -390,10 +411,23 @@ tbody td:nth-child(6) {
 
 thead th:nth-child(7),
 tbody td:nth-child(7) {
-  @apply w-32 lg:w-24 text-left;
+  @apply w-32 lg:w-12 text-left;
 }
 thead th:nth-child(8),
 tbody td:nth-child(8) {
   @apply w-10 pr-0 text-center;
 }
+
+.item-to-do {
+  @apply bg-gray-600
+}
+
+.item-in-progress {
+  @apply bg-orange-600
+}
+
+.item-done {
+  @apply bg-emerald-600
+}
+
 </style>

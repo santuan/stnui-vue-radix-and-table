@@ -14,7 +14,7 @@ import {
 <template>
   <DialogRoot>
     <DialogTrigger
-      class="rounded-full w-[35px] h-[35px] inline-flex items-center justify-center text-grass11 bg-white dark:bg-gray-800   hover:bg-green3 focus:shadow focus:shadow-black cursor-pointer hover:bg-opacity-80 outline-none"
+      class="rounded-full w-[35px] h-[35px] inline-flex items-center justify-center text-grass11 bg-gray-200 dark:bg-gray-800 hover:bg-green3 focus:shadow focus:shadow-black cursor-pointer hover:bg-opacity-80 outline-none"
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
         <path

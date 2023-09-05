@@ -1,20 +1,24 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { CheckboxRoot, CheckboxIndicator } from 'radix-vue'
-defineProps<{
+import slugify from '@/components/slugify'
+
+const props = defineProps<{
   msg: string
+  value: number
+  checked: boolean
 }>()
-const checkboxOne = ref(false)
+
+const checkboxOne = ref(props.checked)
+
 </script>
 
 <template>
-  <div class="flex justify-center items-center gap-2.5">
-    <label
-      class="flex focus-visible:ring-2 flex-row gap-4 items-center [&>.checkbox]:hover:bg-gray-100"
-    >
+  <div class="flex px-2 py-2 focus-within:dark:bg-gray-800 focus-within:bg-gray-200 w-full justify-between items-center gap-1">
+    <label class="flex flex-row gap-4 items-center [&>.checkbox]:hover:bg-gray-100">
       <CheckboxRoot
         v-model="checkboxOne"
-        class="border flex h-5 w-5 appearance-none items-center justify-center rounded-sm bg-white dark:bg-gray-900 dark:border-gray-700 shadow outline-none focus-within:shadow-sm focus-visible:shadow-lg focus-visible:shadow-destructive"
+        class="border flex h-5 w-5 appearance-none items-center justify-center rounded-sm bg-white dark:bg-gray-900 dark:border-gray-700 shadow outline-none"
       >
         <CheckboxIndicator
           class="bg-black dark:bg-gray-100 cursor-pointer dark:border-gray-700 h-full w-full rounded flex items-center justify-center"
@@ -35,7 +39,8 @@ const checkboxOne = ref(false)
           </svg>
         </CheckboxIndicator>
       </CheckboxRoot>
-      <span class="select-none text-sm text-gray-900 dark:text-white">{{msg}}</span>
+      <span class="select-none text-sm text-gray-900 dark:text-white">{{ msg }}</span>
     </label>
+    <span :class="'item-' + slugify(msg)" class="font-mono w-6 justify-center items-center text-xs py-1 font-bold inline-flex rounded-md ">{{ value }}</span>
   </div>
 </template>
