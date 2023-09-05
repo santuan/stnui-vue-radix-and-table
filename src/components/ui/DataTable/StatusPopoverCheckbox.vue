@@ -41,6 +41,6 @@ const checkboxOne = ref(props.checked)
       </CheckboxRoot>
       <span class="select-none text-sm text-gray-900 dark:text-white">{{ msg }}</span>
     </label>
-    <span :class="'item-' + slugify(msg)" class="font-mono w-6 justify-center items-center text-xs py-1 font-bold inline-flex rounded-md ">{{ value }}</span>
+    <span :class="'item-' + slugify(msg)" class="font-mono w-6 text-white justify-center items-center text-xs py-1 font-bold inline-flex rounded-md ">{{ value }}</span>
   </div>
 </template>
