@@ -51,7 +51,6 @@ const pageSizes = [10, 20, 30, 40, 50]
 const data = ref(defaultData)
 const sorting = ref([])
 
-
 const columns = [
   {
     id: 'checkbox',
@@ -83,8 +82,8 @@ const columns = [
     cell: (info) => (
       <span
         class={
-          'item-'
-          + slugify(info.getValue()) +
+          'item-' +
+          slugify(info.getValue()) +
           ' dark:bg-gray-800 text-gray-100 text-xs font-mono px-2 py-1 rounded inline-flex justify-center items-baseline bg-gray-200 '
         }
       >
@@ -171,7 +170,9 @@ function handlePageSizeChange(e) {
               @click="header.column.getToggleSortingHandler()?.($event)"
             >
               <template v-if="!header.isPlaceholder">
-                <div class="relative flex items-center justify-between">
+                <button
+                  class="relative flex items-center justify-between outline-none focus-visible:border px-1 border-gray-400 dark:border-gray-300 w-full border-dashed"
+                >
                   <FlexRender
                     :render="header.column.columnDef.header"
                     :props="header.getContext()"
@@ -184,7 +185,7 @@ function handlePageSizeChange(e) {
                       <IconDesc />
                     </span>
                   </div>
-                </div>
+                </button>
               </template>
             </th>
           </tr>
@@ -334,7 +335,9 @@ function handlePageSizeChange(e) {
 </template>
 
 <style>
-/* table {} */
+table {
+  @apply table-auto lg:table-fixed;
+}
 
 thead {
   @apply z-50 -translate-y-0.5;
@@ -374,60 +377,60 @@ tr:nth-child(odd) {
 
 /* Columns */
 
-thead th:nth-child(1) div {
+thead th:nth-child(1) button {
   @apply justify-center items-center;
 }
 
 thead th:nth-child(1),
 tbody td:nth-child(1) {
-  @apply w-6 lg:px-0 pl-6 text-center;
+  @apply w-3 lg:px-0 pl-2 text-center;
   max-width: 20px;
 }
 
 thead th:nth-child(2),
 tbody td:nth-child(2) {
-  @apply w-16 min-w-[8rem] lg:pl-0 text-left;
+  @apply w-16 shrink-0 lg:min-w-[3rem] lg:max-w-[3rem] lg:pl-0 text-left;
 }
 
 thead th:nth-child(3),
 tbody td:nth-child(3) {
-  @apply w-64 lg:w-64 text-left;
+  @apply w-64 lg:w-24 text-left;
 }
 
 thead th:nth-child(4),
 tbody td:nth-child(4) {
-  @apply w-32 lg:w-16 text-left;
+  @apply w-32 lg:w-16 lg:min-w-[3rem] lg:max-w-[3rem] text-left;
 }
 
 thead th:nth-child(5),
 tbody td:nth-child(5) {
-  @apply w-32 lg:w-20 text-left;
+  @apply w-32 lg:w-20 lg:min-w-[3rem] lg:max-w-[3rem] text-left;
 }
 
 thead th:nth-child(6),
 tbody td:nth-child(6) {
-  @apply w-32 lg:w-24 text-left;
+  @apply w-32 lg:w-24 lg:min-w-[5rem] lg:max-w-[5rem] text-left;
 }
 
 thead th:nth-child(7),
 tbody td:nth-child(7) {
-  @apply w-32 lg:w-12 text-left;
+  @apply w-32 lg:w-12 lg:min-w-[5rem] lg:max-w-[5rem] text-left;
 }
+
 thead th:nth-child(8),
 tbody td:nth-child(8) {
-  @apply w-10 pr-0 text-center;
+  @apply w-6 pr-0 text-center;
 }
 
 .item-to-do {
-  @apply bg-gray-600
+  @apply bg-gray-600;
 }
 
 .item-in-progress {
-  @apply bg-orange-600
+  @apply bg-orange-600;
 }
 
 .item-done {
-  @apply bg-emerald-600
+  @apply bg-emerald-600;
 }
-
 </style>
