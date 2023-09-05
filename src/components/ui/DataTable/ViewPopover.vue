@@ -26,7 +26,7 @@ import { Button } from '@/components/ui/Button/Button';
       </svg>
       View
     </PopoverTrigger>
-    <PopoverPortal class="z-[900]">
+    <PopoverPortal >
       <PopoverContent
         side="bottom"
         align="end"

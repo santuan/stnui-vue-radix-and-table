@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import {
-  PopoverArrow,
-  PopoverClose,
   PopoverContent,
   PopoverPortal,
   PopoverRoot,
@@ -19,7 +17,7 @@ import StatusPopoverCheckbox from './StatusPopoverCheckbox.vue'
       <IconPlusCircle />
       Status
     </PopoverTrigger>
-    <PopoverPortal class="z-[900]">
+    <PopoverPortal>
       <PopoverContent
         side="bottom"
         align="start"

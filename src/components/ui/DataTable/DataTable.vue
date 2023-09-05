@@ -18,6 +18,7 @@ import IconDesc from '@/components/icons/IconDesc.vue'
 import PEOPLE from '@/data/person.json'
 
 export type Person = {
+  id: number
   firstName: string
   lastName: string
   age: number
@@ -31,6 +32,7 @@ export type Person = {
 import {
   SelectContent,
   SelectItem,
+  SelectItemIndicator,
   SelectPortal,
   SelectRoot,
   SelectTrigger,
@@ -54,15 +56,16 @@ const columns = [
     header: () => <DataTableCheckbox />,
     cell: () => <DataTableCheckbox />
   },
-  columnHelper.accessor('firstName', {
-    header: 'First Name',
-    cell: (info) => info.getValue(),
+  columnHelper.accessor('id', {
+    header: 'Task',
+    // cell: (info) => info.getValue(),
+    cell: (info) => <div class={'uppercase'}>Task - {info.getValue()}</div>,
     footer: (props) => props.column.id
   }),
   columnHelper.accessor((row) => row.lastName, {
     id: 'lastName',
     cell: (info) => info.getValue(),
-    header: () => 'Last Name',
+    header: () => 'Title',
     footer: (props) => props.column.id
   }),
   columnHelper.accessor('age', {
@@ -121,7 +124,7 @@ function handlePageSizeChange(e) {
           class="ring-1 ring-gray-500/50 h-8 rounded-md text-xs px-3 w-64 py-1.5 dark:bg-gray-950"
         />
         <div class="flex gap-2 items-center">
-          <StatusPopover/>
+          <StatusPopover />
           <button :class="Button({ intent: 'default', size: 'sm' })">
             <IconPlusCircle />
             Priority
@@ -183,38 +186,41 @@ function handlePageSizeChange(e) {
         </strong>
       </div>
 
-      <div class="flex items-center justify-end gap-5">
+      <div class="flex items-center justify-end gap-2">
         <!-- <DataTableSelect
           :pageSizes="pageSizes"
           :paginationPageSize="table.getState().pagination.pageSize"
         /> -->
-        <select
-          class="dark:bg-gray-900 py-2 !px-6 rounded-sm dark:text-gray-300 border dark:border-gray-600"
-          :value="table.getState().pagination.pageSize"
-          @change="handlePageSizeChange"
-        >
-          <option :key="pageSize" :value="pageSize" v-for="pageSize in pageSizes">
-            Show {{ pageSize }}
-          </option>
-        </select>
+        <div class="flex gap-2 items-center">
+          <span>Rows per page (Native Select)</span>
+          <select
+            class="dark:bg-gray-900 py-1 h-8 outline-none ring-2 ring-transparent duration-300 dark:ring-gray-700 focus-visible:ring-white !px-2 rounded-sm dark:text-gray-300 border dark:border-gray-700"
+            :value="table.getState().pagination.pageSize"
+            @change="handlePageSizeChange"
+          >
+            <option :key="pageSize" :value="pageSize" v-for="pageSize in pageSizes">
+              {{ pageSize }}
+            </option>
+          </select>
+        </div>
         <div class="flex justify-end items-center gap-2">
-          <span>Rows per page</span>
+          <span>Rows per page (Radix Select)</span>
           <SelectRoot :value="table.getState().pagination.pageSize" @change="handlePageSizeChange">
             <SelectTrigger
-              className="inline-flex w-16 items-center justify-between ring-1 ring-gray-500/50 rounded px-3 text-sm leading-none h-8 gap-[5px] bg-white text-gray-900 shadow shadow-black/10 hover:bg-gray-100 focus:shadow-sm dark:bg-gray-900 dark:text-white hover:dark:text-gray-100 hover:dark:bg-gray-950 focus:shadow-black data-[placeholder]:text-green9 outline-none"
+              className="inline-flex w-16 items-center justify-between rounded px-2 text-sm h-8 gap-1 bg-white text-gray-900 shadow shadow-black/10 hover:bg-gray-100 focus:shadow-sm dark:bg-gray-900 dark:text-white hover:dark:text-gray-100 outline-none ring-2 ring-transparent duration-300 dark:ring-gray-700 focus-visible:ring-white hover:dark:bg-gray-950 focus:shadow-black data-[placeholder]:text-gray-500"
             >
               <SelectValue :placeholder="table.getState().pagination.pageSize" />
               <svg
+                class="h-4 w-4"
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-3.5 w-3.5"
                 width="32"
                 height="32"
                 viewBox="0 0 15 15"
               >
                 <path
-                  class="fill-gray-900 dark:fill-white"
+                  class="dark:fill-gray-100 fill-gray-900"
                   fill-rule="evenodd"
-                  d="M3.135 6.158a.5.5 0 0 1 .707-.023L7.5 9.565l3.658-3.43a.5.5 0 0 1 .684.73l-4 3.75a.5.5 0 0 1-.684 0l-4-3.75a.5.5 0 0 1-.023-.707Z"
+                  d="M4.932 5.432a.45.45 0 1 0 .636.636L7.5 4.136l1.932 1.932a.45.45 0 0 0 .636-.636l-2.25-2.25a.45.45 0 0 0-.636 0l-2.25 2.25Zm5.136 4.136a.45.45 0 0 0-.636-.636L7.5 10.864L5.568 8.932a.45.45 0 0 0-.636.636l2.25 2.25a.45.45 0 0 0 .636 0l2.25-2.25Z"
                   clip-rule="evenodd"
                 />
               </svg>
@@ -225,15 +231,34 @@ function handlePageSizeChange(e) {
                 :side-offset="5"
                 position="popper"
                 side="top"
-                class="w-16 bg-white dark:bg-gray-950 dark:text-white rounded shadow will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
+                align="start"
+                class="w-24 bg-white ring-1 ring-gray-600 dark:bg-gray-950 dark:text-white rounded shadow will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
               >
                 <SelectItem
                   v-for="pageSize in pageSizes"
                   :key="pageSize"
                   :value="pageSize"
-                  class="text-sm leading-none hover:ring-2 dark:ring-gray-500/50 text-grass11 rounded flex items-center h-12 pr-6 pl-6 relative select-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:outline-none data-[highlighted]:bg-green9 data-[highlighted]:text-green1"
+                  class="text-sm leading-none focus-visible:bg-gray-100 focus-visible:dark:bg-gray-800 focus-visible:dark:ring-transparent focus-visible:ring-2 hover:ring-2 dark:ring-gray-500/50 text-grass11 rounded flex items-center py-2 pr-6 pl-3 relative select-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:outline-none data-[highlighted]:bg-green9 data-[highlighted]:text-green1"
                 >
                   {{ pageSize }}
+                  <SelectItemIndicator
+                    class="absolute right-0 w-[25px] inline-flex items-center justify-center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-3.5 w-3.5"
+                      width="32"
+                      height="32"
+                      viewBox="0 0 15 15"
+                    >
+                      <path
+                        class="fill-gray-900 dark:fill-gray-100"
+                        fill-rule="evenodd"
+                        d="M11.467 3.727c.289.189.37.576.181.865l-4.25 6.5a.625.625 0 0 1-.944.12l-2.75-2.5a.625.625 0 0 1 .841-.925l2.208 2.007l3.849-5.886a.625.625 0 0 1 .865-.181Z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </SelectItemIndicator>
                 </SelectItem>
               </SelectContent>
             </SelectPortal>
@@ -340,12 +365,12 @@ tbody td:nth-child(1) {
 
 thead th:nth-child(2),
 tbody td:nth-child(2) {
-  @apply w-64 pl-0 text-left;
+  @apply w-8 pl-0 text-left;
 }
 
 thead th:nth-child(3),
 tbody td:nth-child(3) {
-  @apply w-64 lg:w-20 text-left;
+  @apply w-64 lg:w-64 text-left;
 }
 
 thead th:nth-child(4),
