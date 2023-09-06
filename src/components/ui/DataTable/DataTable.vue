@@ -7,7 +7,7 @@ import {
   getSortedRowModel,
   createColumnHelper
 } from '@tanstack/vue-table'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { Button } from '../Button/Button'
 import DataTableActions from './DataTableActions.vue'
 import DataTableCheckbox from './DataTableCheckbox.vue'
@@ -132,6 +132,15 @@ const table = useVueTable({
 function handlePageSizeChange(e) {
   table.setPageSize(Number(e.target.value))
 }
+
+const pageSize = computed({
+  get() {
+    return table.getState().pagination.pageSize.toString()
+  },
+  set(value) {
+    table.setPageSize(Number(value))
+  },
+})
 </script>
 
 <template>
@@ -209,25 +218,9 @@ function handlePageSizeChange(e) {
       </div>
 
       <div class="flex items-center justify-end gap-2">
-        <!-- <DataTableSelect
-          :pageSizes="pageSizes"
-          :paginationPageSize="table.getState().pagination.pageSize"
-        /> -->
-        <div class="flex gap-2 items-center">
-          <span>Rows per page (Native Select)</span>
-          <select
-            class="dark:bg-gray-900 py-1 h-8 outline-none ring-2 ring-transparent duration-300 dark:ring-gray-700 focus-visible:ring-white !px-2 rounded-sm dark:text-gray-300 border dark:border-gray-700"
-            :value="table.getState().pagination.pageSize"
-            @change="handlePageSizeChange"
-          >
-            <option :key="pageSize" :value="pageSize" v-for="pageSize in pageSizes">
-              {{ pageSize }}
-            </option>
-          </select>
-        </div>
         <div class="flex justify-end items-center gap-2">
-          <span>Rows per page (Radix Select)</span>
-          <SelectRoot :value="table.getState().pagination.pageSize" @change="handlePageSizeChange">
+          <span>Rows per page</span>
+          <SelectRoot v-model="pageSize" >
             <SelectTrigger
               className="inline-flex w-16 items-center justify-between rounded px-2 text-sm h-8 gap-1 bg-white text-gray-900 shadow shadow-black/10 hover:bg-gray-100 focus:shadow-sm dark:bg-gray-900 dark:text-white hover:dark:text-gray-100 outline-none ring-2 ring-transparent duration-300 dark:ring-gray-700 focus-visible:ring-white hover:dark:bg-gray-950 focus:shadow-black data-[placeholder]:text-gray-500"
             >
@@ -259,7 +252,7 @@ function handlePageSizeChange(e) {
                 <SelectItem
                   v-for="pageSize in pageSizes"
                   :key="pageSize"
-                  :value="pageSize"
+                  :value="`${pageSize}`"
                   class="text-sm leading-none focus-visible:bg-gray-100 focus-visible:dark:bg-gray-800 focus-visible:dark:ring-transparent focus-visible:ring-2 hover:ring-2 dark:ring-gray-500/50 text-grass11 rounded flex items-center py-2 pr-6 pl-3 relative select-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:outline-none data-[highlighted]:bg-green9 data-[highlighted]:text-green1"
                 >
                   {{ pageSize }}
